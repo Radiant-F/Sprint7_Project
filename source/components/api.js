@@ -54,7 +54,7 @@ export class ascStrg extends Component {
       .catch((err) => console.log(err));
   }
 
-  check = () => {
+  mata = () => {
     const eye = !this.state.check;
     this.setState({check: eye});
   };
@@ -80,7 +80,7 @@ export class ascStrg extends Component {
             <View style={styles.viewTask}>
               <Text>{value}</Text>
             </View>
-            <TouchableOpacity onPress={() => this.check()}>
+            <TouchableOpacity onPress={() => this.mata()}>
               <Image
                 source={
                   this.state.check
