@@ -12,6 +12,7 @@ import Hai from '../hai';
 import House from '../assets/home.png';
 import Pencil from '../assets/pencilOutline.png';
 import Avatar from '../assets/plainAvatar.png';
+import DrawerContent from './drawer';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -78,7 +79,7 @@ const Drawer = createDrawerNavigator();
 
 const TheDrawer = () => {
   return (
-    <Drawer.Navigator>
+    <Drawer.Navigator drawerContent={() => <DrawerContent />}>
       <Drawer.Screen name="Home" component={BottomTab} />
     </Drawer.Navigator>
   );
