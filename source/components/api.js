@@ -1,6 +1,8 @@
 import AsyncStorage from '@react-native-community/async-storage';
 import React, {Component} from 'react';
-import {Text, View, TextInput, TouchableOpacity} from 'react-native';
+import {Text, View, TextInput, TouchableOpacity, Image} from 'react-native';
+import trash from '../assets/trash.png';
+import styles from './styles/ascStrg';
 
 export class api extends Component {
   constructor(properti) {
@@ -12,6 +14,9 @@ export class api extends Component {
       ulangiPassword: '',
       cekPassword: true,
       ulangiCekPassword: true,
+      textInput: '',
+      data: ['Muhammad'],
+      check: true,
     };
     AsyncStorage.getItem('token').then((value) => {
       console.log(value);
@@ -23,123 +28,88 @@ export class api extends Component {
     });
   }
 
-  Register() {
-    const {name, email, password, ulangiPassword} = this.state;
+  addData() {
+    const {textInput, data} = this.state;
+    this.setState({data: [textInput, ...data]}, function () {
+      this.saveData();
+    });
+  }
 
-    //POST json
-    var dataToSend = {
-      name: name,
-      email: email,
-      password: password,
-      password_confirmation: ulangiPassword,
-    };
-    //making data to send on server
-    var formBody = [];
-    for (var key in dataToSend) {
-      var encodedKey = encodeURIComponent(key);
-      var encodedValue = encodeURIComponent(dataToSend[key]);
-      formBody.push(encodedKey + '=' + encodedValue);
-    }
-    formBody = formBody.join('&');
-    //POST request
-    fetch('http://restful-api-laravel-7.herokuapp.com/api/register', {
-      method: 'POST', //Request Type
-      body: formBody, //post body
-      headers: {
-        //Header Defination
-        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+  deleteData(index) {
+    const {data} = this.state;
+    this.setState(
+      {
+        data: data.filter((value, id) => id != index),
       },
-    })
-      .then((response) => response.json())
-      //If response is in json then in success
-      .then((responseJson) => {
-        console.log(responseJson);
-        const {token} = responseJson;
-        if (token) {
-          alert('Registrasi Sukses');
-          AsyncStorage.setItem('token', token);
-          this.props.navigation.navigate('hai');
+      function () {
+        this.saveData();
+      },
+    );
+  }
+
+  saveData() {
+    AsyncStorage.setItem('data', JSON.stringify(this.state.data)).catch((err) =>
+      console.log(err),
+    );
+  }
+
+  componentDidMount() {
+    AsyncStorage.getItem('data')
+      .then((response) => {
+        if (response) {
+          console.log(response);
+          let data = JSON.parse(response);
+          this.setState({data: data});
         } else {
-          alert('Make sure there is no empty box.');
+          console.log(response);
         }
       })
-      //If response is not in json then in error
-      .catch((error) => {
-        alert('Pastikan Form Sudah Terisi dengan benar');
-      });
+      .catch((err) => console.log(err));
   }
+
+  mata = () => {
+    const eye = !this.state.check;
+    this.setState({check: eye});
+  };
 
   render() {
     return (
-      <View style={{margin: 20}}>
-        <Text> Name </Text>
-        <View
-          style={{
-            backgroundColor: '#d4d4d4',
-            borderRadius: 10,
-            paddingHorizontal: 10,
-          }}>
-          <TextInput
-            placeholder="Your Name"
-            onChangeText={(name) => this.setState({name})}
-          />
-        </View>
-        <Text> Email </Text>
-        <View
-          style={{
-            backgroundColor: '#d4d4d4',
-            borderRadius: 10,
-            paddingHorizontal: 10,
-          }}>
-          <TextInput
-            placeholder="youremail@example.com"
-            onChangeText={(surel) => this.setState({email: surel})}
-          />
-        </View>
-        <Text> Password </Text>
-        <View
-          style={{
-            backgroundColor: '#d4d4d4',
-            borderRadius: 10,
-            paddingHorizontal: 10,
-          }}>
-          <TextInput
-            placeholder="Your_Pass"
-            onChangeText={(sandi) => this.setState({password: sandi})}
-            secureTextEntry={true}
-          />
-        </View>
-        <View
-          style={{
-            backgroundColor: '#d4d4d4',
-            borderRadius: 10,
-            paddingHorizontal: 10,
-            marginTop: 10,
-          }}>
-          <TextInput
-            placeholder="Confirm_Pass"
-            onChangeText={(resandi) => this.setState({ulangiPassword: resandi})}
-            secureTextEntry={true}
-          />
-        </View>
-        <TouchableOpacity onPress={() => this.Register()}>
-          <View
-            style={{
-              backgroundColor: 'aqua',
-              height: 50,
-              alignItems: 'center',
-              justifyContent: 'center',
-              borderRadius: 10,
-              marginTop: 20,
-            }}>
-            <Text style={{fontWeight: 'bold', fontSize: 20}}>
-              Reveal secret ;)
-            </Text>
+      <View style={{backgroundColor: '#00000087', flex: 1}}>
+        <View style={{flexDirection: 'row', margin: 10}}>
+          <View style={styles.textInputView}>
+            <TextInput
+              placeholder="Add to do..."
+              onChangeText={(input) => this.setState({textInput: input})}
+            />
           </View>
-        </TouchableOpacity>
+          <TouchableOpacity onPress={() => this.addData()}>
+            <View style={styles.plusView}>
+              <Text style={styles.plusText}>+</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+        {this.state.data.map((value, index) => (
+          <View style={styles.viewList} key={index}>
+            <View style={styles.viewTask}>
+              <Text>{value}</Text>
+            </View>
+            <TouchableOpacity onPress={() => this.mata()}>
+              <Image
+                source={
+                  this.state.check
+                    ? require('../assets/checkboxempt.png')
+                    : require('../assets/checkboxfilled.png')
+                }
+                style={{width: 30, height: 30, marginLeft: 10}}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => this.deleteData(index)}>
+              <Image source={trash} style={{width: 25, height: 30}} />
+            </TouchableOpacity>
+          </View>
+        ))}
       </View>
     );
   }
 }
-
 export default api;

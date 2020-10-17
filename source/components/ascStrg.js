@@ -34,13 +34,14 @@ export class ascStrg extends Component {
   }
 
   saveData() {
-    AsyncStorage.setItem('data', JSON.stringify(this.state.data)).catch((err) =>
-      console.log(err),
-    );
+    AsyncStorage.setItem(
+      'datas',
+      JSON.stringify(this.state.data),
+    ).catch((err) => console.log(err));
   }
 
   componentDidMount() {
-    AsyncStorage.getItem('data')
+    AsyncStorage.getItem('datas')
       .then((response) => {
         if (response) {
           console.log(response);
