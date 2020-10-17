@@ -29,14 +29,12 @@ export default class Register extends Component {
   Register() {
     const {name, email, password, ulangiPassword} = this.state;
 
-    //POST json
     var dataToSend = {
       name: name,
       email: email,
       password: password,
       password_confirmation: ulangiPassword,
     };
-    //making data to send on server
     var formBody = [];
     for (var key in dataToSend) {
       var encodedKey = encodeURIComponent(key);
@@ -44,30 +42,26 @@ export default class Register extends Component {
       formBody.push(encodedKey + '=' + encodedValue);
     }
     formBody = formBody.join('&');
-    //POST request
     fetch('http://restful-api-laravel-7.herokuapp.com/api/register', {
-      method: 'POST', //Request Type
-      body: formBody, //post body
+      method: 'POST',
+      body: formBody,
       headers: {
-        //Header Defination
         'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
       },
     })
       .then((response) => response.json())
-      //If response is in json then in success
       .then((responseJson) => {
         console.log(responseJson);
         const {token} = responseJson;
         if (token) {
-          alert('register sukses');
+          alert('Success');
           this.props.navigation.goBack();
         } else {
           alert('Pastikan Form Sudah Terisi dengan benar');
         }
       })
-      //If response is not in json then in error
       .catch((error) => {
-        alert('Pastikan Form Sudah Terisi dengan benar');
+        alert('Something went wrong..');
       });
   }
   render() {

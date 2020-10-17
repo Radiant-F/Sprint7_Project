@@ -20,14 +20,14 @@ export default class Login extends Component {
       email: '',
       password: '',
     };
-    // AsyncStorage.getItem('token').then((value) => {
-    //   console.log(value);
-    //   if (value !== null) {
-    //     this.props.navigation.navigate('Home');
-    //   } else {
-    //     this.props.navigation.navigate('Login');
-    //   }
-    // });
+    AsyncStorage.getItem('token').then((value) => {
+      console.log(value);
+      if (value !== null) {
+        this.props.navigation.navigate('Home');
+      } else {
+        this.props.navigation.navigate('Login');
+      }
+    });
   }
 
   componentDidMount() {
@@ -71,7 +71,7 @@ export default class Login extends Component {
         console.log(responseJSON);
         const {token} = responseJSON;
         if (token) {
-          //   AsyncStorage.setItem('token', token);
+          AsyncStorage.setItem('token', token);
           this.props.navigation.navigate('Home');
         } else {
           alert('Make sure your data is correct.');

@@ -9,7 +9,7 @@ export class ascStrg extends Component {
     super();
     this.state = {
       textInput: '',
-      data: ['Fadilah'],
+      data: ['Radiant'],
       check: true,
     };
   }

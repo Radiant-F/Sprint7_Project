@@ -15,13 +15,13 @@ export class api extends Component {
       cekPassword: true,
       ulangiCekPassword: true,
       textInput: '',
-      data: ['Muhammad'],
+      data: ['Fadilah'],
       check: true,
     };
-    AsyncStorage.getItem('token').then((value) => {
+    AsyncStorage.getItem('datas').then((value) => {
       console.log(value);
       if (value !== null) {
-        this.props.navigation.navigate('hai');
+        this.props.navigation.navigate('API');
       } else {
         this.props.navigation.navigate('API');
       }
@@ -48,18 +48,19 @@ export class api extends Component {
   }
 
   saveData() {
-    AsyncStorage.setItem('data', JSON.stringify(this.state.data)).catch((err) =>
-      console.log(err),
-    );
+    AsyncStorage.setItem(
+      'datas',
+      JSON.stringify(this.state.data),
+    ).catch((err) => console.log(err));
   }
 
   componentDidMount() {
-    AsyncStorage.getItem('data')
+    AsyncStorage.getItem('datas')
       .then((response) => {
         if (response) {
           console.log(response);
-          let data = JSON.parse(response);
-          this.setState({data: data});
+          let datas = JSON.parse(response);
+          this.setState({data: datas});
         } else {
           console.log(response);
         }

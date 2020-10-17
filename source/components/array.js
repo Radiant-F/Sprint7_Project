@@ -8,7 +8,7 @@ export class array extends Component {
     super();
     this.state = {
       textInput: '',
-      data: ['Radiant'],
+      data: ['Muhammad'],
       check: true,
     };
   }
