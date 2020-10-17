@@ -32,7 +32,7 @@ export class array extends Component {
 
   render() {
     return (
-      <View style={{backgroundColor: '#00000087', flex: 1}}>
+      <View style={{backgroundColor: '#00000052', flex: 1}}>
         <View style={{flexDirection: 'row', margin: 10}}>
           <View style={styles.textInputView}>
             <TextInput

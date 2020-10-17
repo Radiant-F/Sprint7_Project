@@ -1,56 +1,28 @@
 import React, {Component} from 'react';
 import {Text, TextInput, TouchableOpacity, View, Image} from 'react-native';
-import styles from './styles/ascStrg';
-import AsyncStorage from '@react-native-community/async-storage';
+import styles from './styles/array';
 import trash from '../assets/trash.png';
 
-export class ascStrg extends Component {
+export class array extends Component {
   constructor() {
     super();
     this.state = {
       textInput: '',
-      data: ['Radiant'],
+      data: ['Muhammad'],
       check: true,
     };
   }
 
   addData() {
     const {textInput, data} = this.state;
-    this.setState({data: [textInput, ...data]}, function () {
-      this.saveData();
-    });
+    this.setState({data: [textInput, ...data]});
   }
 
   deleteData(index) {
     const {data} = this.state;
-    this.setState(
-      {
-        data: data.filter((value, id) => id != index),
-      },
-      function () {
-        this.saveData();
-      },
-    );
-  }
-
-  saveData() {
-    AsyncStorage.setItem('data', JSON.stringify(this.state.data)).catch((err) =>
-      console.log(err),
-    );
-  }
-
-  componentDidMount() {
-    AsyncStorage.getItem('data')
-      .then((response) => {
-        if (response) {
-          console.log(response);
-          let data = JSON.parse(response);
-          this.setState({data: data});
-        } else {
-          console.log(response);
-        }
-      })
-      .catch((err) => console.log(err));
+    this.setState({
+      data: data.filter((value, id) => id != index),
+    });
   }
 
   mata = () => {
@@ -60,7 +32,7 @@ export class ascStrg extends Component {
 
   render() {
     return (
-      <View style={{backgroundColor: '#00000052', flex: 1}}>
+      <View style={{backgroundColor: '#00000087', flex: 1}}>
         <View style={{flexDirection: 'row', margin: 10}}>
           <View style={styles.textInputView}>
             <TextInput
@@ -99,4 +71,4 @@ export class ascStrg extends Component {
   }
 }
 
-export default ascStrg;
+export default array;

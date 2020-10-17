@@ -57,7 +57,7 @@ export default class Register extends Component {
           alert('Success');
           this.props.navigation.goBack();
         } else {
-          alert('Pastikan formulir terisi dengan benar');
+          alert('Pastikan Form Sudah Terisi dengan benar');
         }
       })
       .catch((error) => {

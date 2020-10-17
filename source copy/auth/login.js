@@ -38,7 +38,7 @@ export default class Login extends Component {
     fetch('http://restful-api-laravel-7.herokuapp.com/api/todo/', {
       method: 'GET',
       Authorization:
-        'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9yZXN0ZnVsLWFwaS1sYXJhdmVsLTcuaGVyb2t1YXBwLmNvbVwvYXBpXC9yZWdpc3RlciIsImlhdCI6MTYwMjkxMjQyMCwiZXhwIjoxNjAyOTE2MDIwLCJuYmYiOjE2MDI5MTI0MjAsImp0aSI6IjVINWV0MUxwbkx2dTFXeXAiLCJzdWIiOjQ1LCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.bacNT-rdIy8hjdj-KcL_qwuZNnYRwODfTK5PMAtFWiQ',
+        'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9yZXN0ZnVsLWFwaS1sYXJhdmVsLTcuaGVyb2t1YXBwLmNvbVwvYXBpXC9yZWdpc3RlciIsImlhdCI6MTYwMjc1NTYxNywiZXhwIjoxNjAyNzU5MjE3LCJuYmYiOjE2MDI3NTU2MTcsImp0aSI6IkF4bTdsM0tWcHUzSTRsYmUiLCJzdWIiOjE4LCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.94FHFLFdeJGeN6bWnzp49eoqZDIjt-2tWs2SkVJi5O8',
     })
       .then((response) => response.json())
       .then((responseJSON) => {

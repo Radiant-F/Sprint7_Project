@@ -34,13 +34,14 @@ export class ascStrg extends Component {
   }
 
   saveData() {
-    AsyncStorage.setItem('data', JSON.stringify(this.state.data)).catch((err) =>
-      console.log(err),
-    );
+    AsyncStorage.setItem(
+      'datas',
+      JSON.stringify(this.state.data),
+    ).catch((err) => console.log(err));
   }
 
   componentDidMount() {
-    AsyncStorage.getItem('data')
+    AsyncStorage.getItem('datas')
       .then((response) => {
         if (response) {
           console.log(response);
@@ -60,7 +61,7 @@ export class ascStrg extends Component {
 
   render() {
     return (
-      <View style={{backgroundColor: '#00000052', flex: 1}}>
+      <View style={{backgroundColor: '#00000087', flex: 1}}>
         <View style={{flexDirection: 'row', margin: 10}}>
           <View style={styles.textInputView}>
             <TextInput

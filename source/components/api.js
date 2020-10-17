@@ -1,31 +1,17 @@
-import AsyncStorage from '@react-native-community/async-storage';
 import React, {Component} from 'react';
-import {Text, View, TextInput, TouchableOpacity, Image} from 'react-native';
-import trash from '../assets/trash.png';
+import {Text, TextInput, TouchableOpacity, View, Image} from 'react-native';
 import styles from './styles/ascStrg';
+import AsyncStorage from '@react-native-community/async-storage';
+import trash from '../assets/trash.png';
 
-export class api extends Component {
-  constructor(properti) {
-    super(properti);
+export class ascStrg extends Component {
+  constructor() {
+    super();
     this.state = {
-      name: '',
-      email: '',
-      password: '',
-      ulangiPassword: '',
-      cekPassword: true,
-      ulangiCekPassword: true,
       textInput: '',
       data: ['Fadilah'],
       check: true,
     };
-    AsyncStorage.getItem('datas').then((value) => {
-      console.log(value);
-      if (value !== null) {
-        this.props.navigation.navigate('API');
-      } else {
-        this.props.navigation.navigate('API');
-      }
-    });
   }
 
   addData() {
@@ -59,8 +45,8 @@ export class api extends Component {
       .then((response) => {
         if (response) {
           console.log(response);
-          let datas = JSON.parse(response);
-          this.setState({data: datas});
+          let data = JSON.parse(response);
+          this.setState({data: data});
         } else {
           console.log(response);
         }
@@ -68,14 +54,14 @@ export class api extends Component {
       .catch((err) => console.log(err));
   }
 
-  mata = () => {
+  check = () => {
     const eye = !this.state.check;
     this.setState({check: eye});
   };
 
   render() {
     return (
-      <View style={{backgroundColor: '#00000087', flex: 1}}>
+      <View style={{backgroundColor: '#00000052', flex: 1}}>
         <View style={{flexDirection: 'row', margin: 10}}>
           <View style={styles.textInputView}>
             <TextInput
@@ -94,7 +80,7 @@ export class api extends Component {
             <View style={styles.viewTask}>
               <Text>{value}</Text>
             </View>
-            <TouchableOpacity onPress={() => this.mata()}>
+            <TouchableOpacity onPress={() => this.check()}>
               <Image
                 source={
                   this.state.check
@@ -113,4 +99,5 @@ export class api extends Component {
     );
   }
 }
-export default api;
+
+export default ascStrg;
