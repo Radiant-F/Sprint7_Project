@@ -1,7 +1,14 @@
 import React, {Component} from 'react';
-import {Text, View, TouchableOpacity, Image} from 'react-native';
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+  ImageBackground,
+} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import aku from '../assets/aku.jpg';
+import bg from '../assets/gradient.jpg';
 
 export class profil extends Component {
   Logout() {
@@ -11,39 +18,41 @@ export class profil extends Component {
 
   render() {
     return (
-      <View style={{backgroundColor: '#00000052', flex: 1}}>
-        <View style={{margin: 20}}>
-          <View>
-            <Image
-              source={aku}
-              style={{
-                width: 100,
-                height: 100,
-                borderRadius: 50,
-                borderWidth: 5,
-                borderColor: 'white',
-                alignSelf: 'center',
-              }}
-            />
-          </View>
-          <Text style={{textAlign: 'center', marginVertical: 20}}>
-            for real, my brain is really slow for this kind of coding. im
-            sorry.. im sorry, im sorry.
-          </Text>
-          <TouchableOpacity onPress={() => this.Logout()}>
-            <View
-              style={{
-                backgroundColor: 'aqua',
-                height: 50,
-                alignItems: 'center',
-                justifyContent: 'center',
-                borderRadius: 10,
-                elevation: 5,
-              }}>
-              <Text style={{fontWeight: 'bold', fontSize: 20}}>Logout</Text>
+      <View>
+        <ImageBackground source={bg} style={{width: '100%', height: '100%'}}>
+          <View style={{margin: 20}}>
+            <View>
+              <Image
+                source={aku}
+                style={{
+                  width: 100,
+                  height: 100,
+                  borderRadius: 50,
+                  borderWidth: 5,
+                  borderColor: 'white',
+                  alignSelf: 'center',
+                }}
+              />
             </View>
-          </TouchableOpacity>
-        </View>
+            <Text
+              style={{textAlign: 'center', marginVertical: 20, color: 'white'}}>
+              D:
+            </Text>
+            <TouchableOpacity onPress={() => this.Logout()}>
+              <View
+                style={{
+                  backgroundColor: 'aqua',
+                  height: 50,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  borderRadius: 10,
+                  elevation: 5,
+                }}>
+                <Text style={{fontWeight: 'bold', fontSize: 20}}>Logout</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+        </ImageBackground>
       </View>
     );
   }

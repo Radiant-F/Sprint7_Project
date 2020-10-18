@@ -4,6 +4,7 @@ import styles from './styles/dashboard';
 import {
   Image,
   ImageBackground,
+  ScrollView,
   Text,
   TextInput,
   TouchableOpacity,
@@ -17,14 +18,35 @@ export class dashboard extends Component {
     super();
     this.state = {
       textInput: '',
-      data: ['Something'],
+      data: ['Rising'],
       desc: '',
       image: '',
-      isDone: '',
+      isDone: '0',
     };
   }
 
   addData() {
+    const todo = {
+      task: this.state.data,
+      desc: this.state.stack,
+      is_done: 0,
+    };
+    fetch('http://restful-api-laravel-7.herokuapp.com/api/todo', {
+      method: 'POST',
+      body: todo,
+      headers: {
+        Authorization: `Bearer  eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9yZXN0ZnVsLWFwaS1sYXJhdmVsLTcuaGVyb2t1YXBwLmNvbVwvYXBpXC9yZWdpc3RlciIsImlhdCI6MTYwMjkxMjQyMCwiZXhwIjoxNjAyOTE2MDIwLCJuYmYiOjE2MDI5MTI0MjAsImp0aSI6IjVINWV0MUxwbkx2dTFXeXAiLCJzdWIiOjQ1LCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.bacNT-rdIy8hjdj-KcL_qwuZNnYRwODfTK5PMAtFWiQ`,
+      },
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        console.log('upload succes', response);
+        alert('Upload success!');
+      })
+      .catch((error) => {
+        console.log('upload error', error);
+        alert('Upload failed!');
+      });
     const {textInput, data} = this.state;
     this.setState({data: [textInput, ...data]}, function () {
       this.saveData();
@@ -39,9 +61,14 @@ export class dashboard extends Component {
 
   deleteData(index) {
     const {data} = this.state;
-    this.setState({
-      data: data.filter((value, id) => id != index),
-    });
+    this.setState(
+      {
+        data: data.filter((value, id) => id != index),
+      },
+      function () {
+        this.saveData();
+      },
+    );
   }
 
   componentDidMount() {
@@ -82,23 +109,25 @@ export class dashboard extends Component {
                 </View>
               </TouchableOpacity>
             </View>
-            {this.state.data.map((value, index) => (
-              <View style={styles.viewList} key={index}>
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    margin: 20,
-                  }}>
-                  <Text style={{color: '#fff', flex: 1}}>{value}</Text>
-                  <TouchableOpacity onPress={() => this.deleteData(index)}>
-                    <Image
-                      source={trash}
-                      style={{width: 25, height: 25, tintColor: '#fff'}}
-                    />
-                  </TouchableOpacity>
+            <ScrollView>
+              {this.state.data.map((value, index) => (
+                <View style={styles.viewList} key={index}>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      margin: 20,
+                    }}>
+                    <Text style={{color: '#fff', flex: 1}}>{value}</Text>
+                    <TouchableOpacity onPress={() => this.deleteData(index)}>
+                      <Image
+                        source={trash}
+                        style={{width: 25, height: 25, tintColor: '#fff'}}
+                      />
+                    </TouchableOpacity>
+                  </View>
                 </View>
-              </View>
-            ))}
+              ))}
+            </ScrollView>
           </View>
         </ImageBackground>
       </View>

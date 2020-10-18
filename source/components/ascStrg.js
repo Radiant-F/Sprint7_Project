@@ -4,6 +4,7 @@ import styles from './styles/dashboard';
 import {
   Image,
   ImageBackground,
+  ScrollView,
   Text,
   TextInput,
   TouchableOpacity,
@@ -17,8 +18,10 @@ export class dashboard extends Component {
     super();
     this.state = {
       textInput: '',
-      data: ['Something'],
+      data: ['Is'],
       desc: '',
+      image: '',
+      isDone: '0',
     };
   }
 
@@ -37,21 +40,27 @@ export class dashboard extends Component {
 
   deleteData(index) {
     const {data} = this.state;
-    this.setState({
-      data: data.filter((value, id) => id != index),
-    });
+    this.setState(
+      {
+        data: data.filter((value, id) => id != index),
+      },
+      function () {
+        this.saveData();
+      },
+    );
   }
 
   componentDidMount() {
-    AsyncStorage.getItem('data').then((response) => {
-      if (response) {
-        console.log(response);
-        let storedData = JSON.parse(response);
-        this.setState({data: storedData});
-      } else {
-        console.log(response);
-      }
-    });
+    AsyncStorage.getItem('data')
+      .then((response) => {
+        if (response != null) {
+          var savedData = JSON.parse(response);
+          this.setState({data: savedData});
+        } else {
+          console.log('Tidak ada data yang tersimpan.');
+        }
+      })
+      .catch((err) => alert('Async Storage tidak berfungsi.'));
   }
 
   render() {
@@ -68,7 +77,7 @@ export class dashboard extends Component {
             <View style={{flexDirection: 'row'}}>
               <TextInput
                 style={styles.textInput}
-                placeholder="the data is stored in cache..."
+                placeholder="the data is stored in cache.."
                 placeholderTextColor="white"
                 selectionColor="pink"
                 onChangeText={(input) => this.setState({textInput: input})}
@@ -79,23 +88,25 @@ export class dashboard extends Component {
                 </View>
               </TouchableOpacity>
             </View>
-            {this.state.data.map((value, index) => (
-              <View style={styles.viewList} key={index}>
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    margin: 20,
-                  }}>
-                  <Text style={{color: '#fff', flex: 1}}>{value}</Text>
-                  <TouchableOpacity onPress={() => this.deleteData(index)}>
-                    <Image
-                      source={trash}
-                      style={{width: 25, height: 25, tintColor: '#fff'}}
-                    />
-                  </TouchableOpacity>
+            <ScrollView>
+              {this.state.data.map((value, index) => (
+                <View style={styles.viewList} key={index}>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      margin: 20,
+                    }}>
+                    <Text style={{color: '#fff', flex: 1}}>{value}</Text>
+                    <TouchableOpacity onPress={() => this.deleteData(index)}>
+                      <Image
+                        source={trash}
+                        style={{width: 25, height: 25, tintColor: '#fff'}}
+                      />
+                    </TouchableOpacity>
+                  </View>
                 </View>
-              </View>
-            ))}
+              ))}
+            </ScrollView>
           </View>
         </ImageBackground>
       </View>

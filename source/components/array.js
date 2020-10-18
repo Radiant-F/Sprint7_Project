@@ -3,6 +3,7 @@ import styles from './styles/dashboard';
 import {
   Image,
   ImageBackground,
+  ScrollView,
   Text,
   TextInput,
   TouchableOpacity,
@@ -58,23 +59,25 @@ export class dashboard extends Component {
                 </View>
               </TouchableOpacity>
             </View>
-            {this.state.data.map((value, index) => (
-              <View style={styles.viewList} key={index}>
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    margin: 20,
-                  }}>
-                  <Text style={{color: '#fff', flex: 1}}>{value}</Text>
-                  <TouchableOpacity onPress={() => this.deleteData(index)}>
-                    <Image
-                      source={trash}
-                      style={{width: 25, height: 25, tintColor: '#fff'}}
-                    />
-                  </TouchableOpacity>
+            <ScrollView>
+              {this.state.data.map((value, index) => (
+                <View style={styles.viewList} key={index}>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      margin: 20,
+                    }}>
+                    <Text style={{color: '#fff', flex: 1}}>{value}</Text>
+                    <TouchableOpacity onPress={() => this.deleteData(index)}>
+                      <Image
+                        source={trash}
+                        style={{width: 25, height: 25, tintColor: '#fff'}}
+                      />
+                    </TouchableOpacity>
+                  </View>
                 </View>
-              </View>
-            ))}
+              ))}
+            </ScrollView>
           </View>
         </ImageBackground>
       </View>
