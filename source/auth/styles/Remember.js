@@ -2,15 +2,25 @@ import {StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
   mainView: {
-    backgroundColor: '#ffffffb3',
+    backgroundColor: '#000000b3',
     margin: 20,
     borderRadius: 10,
+    width: 380,
+    height: 300,
+    justifyContent: 'center',
   },
   mainText: {
+    color: '#fff',
     textAlign: 'center',
     fontSize: 35,
     marginTop: 20,
     marginBottom: 10,
+    textShadowColor: '#db66ff',
+    textShadowRadius: 5,
+    textShadowOffset: {
+      width: 1,
+      height: 1,
+    },
   },
   subView: {
     margin: 10,
@@ -19,7 +29,7 @@ export default StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     alignSelf: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: '#e48aff94',
     borderRadius: 5,
     height: 50,
     width: 300,
@@ -30,6 +40,7 @@ export default StyleSheet.create({
     height: 15,
     marginRight: 7,
     marginLeft: 9,
+    tintColor: '#fff',
   },
   textInput: {
     width: '80%',
@@ -38,11 +49,12 @@ export default StyleSheet.create({
     width: '100%',
     height: '100%',
     justifyContent: 'center',
+    alignItems: 'center',
   },
   textViewLogin: {
     alignSelf: 'center',
     justifyContent: 'center',
-    backgroundColor: '#faaf00',
+    backgroundColor: '#d447ff',
     borderRadius: 5,
     height: 50,
     width: 300,

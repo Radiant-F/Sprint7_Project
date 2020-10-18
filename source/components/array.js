@@ -1,15 +1,23 @@
 import React, {Component} from 'react';
-import {Text, TextInput, TouchableOpacity, View, Image} from 'react-native';
-import styles from './styles/array';
+import styles from './styles/dashboard';
+import {
+  Image,
+  ImageBackground,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import gradient from '../assets/gradient.jpg';
 import trash from '../assets/trash.png';
 
-export class array extends Component {
+export class dashboard extends Component {
   constructor() {
     super();
     this.state = {
       textInput: '',
-      data: ['Muhammad'],
-      check: true,
+      data: ['Something'],
+      desc: '',
     };
   }
 
@@ -25,50 +33,53 @@ export class array extends Component {
     });
   }
 
-  mata = () => {
-    const eye = !this.state.check;
-    this.setState({check: eye});
-  };
-
   render() {
     return (
-      <View style={{backgroundColor: '#00000052', flex: 1}}>
-        <View style={{flexDirection: 'row', margin: 10}}>
-          <View style={styles.textInputView}>
-            <TextInput
-              placeholder="Add to do..."
-              onChangeText={(input) => this.setState({textInput: input})}
-            />
+      <View>
+        <ImageBackground source={gradient} style={styles.bg}>
+          <View style={{margin: 20}}>
+            <Text style={styles.textTitle}>
+              {' '}
+              Got something to do, Radiant?{' '}
+            </Text>
           </View>
-          <TouchableOpacity onPress={() => this.addData()}>
-            <View style={styles.plusView}>
-              <Text style={styles.plusText}>+</Text>
-            </View>
-          </TouchableOpacity>
-        </View>
-        {this.state.data.map((value, index) => (
-          <View style={styles.viewList} key={index}>
-            <View style={styles.viewTask}>
-              <Text>{value}</Text>
-            </View>
-            <TouchableOpacity onPress={() => this.mata()}>
-              <Image
-                source={
-                  this.state.check
-                    ? require('../assets/checkboxempt.png')
-                    : require('../assets/checkboxfilled.png')
-                }
-                style={{width: 30, height: 30, marginLeft: 10}}
+          <View style={styles.mainView}>
+            <View style={{flexDirection: 'row'}}>
+              <TextInput
+                style={styles.textInput}
+                placeholder="the data is stored in RAM..."
+                placeholderTextColor="white"
+                selectionColor="pink"
+                onChangeText={(input) => this.setState({textInput: input})}
               />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.deleteData(index)}>
-              <Image source={trash} style={{width: 25, height: 30}} />
-            </TouchableOpacity>
+              <TouchableOpacity onPress={() => this.addData()}>
+                <View style={styles.viewPlus}>
+                  <Text style={styles.textPlus}>+</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+            {this.state.data.map((value, index) => (
+              <View style={styles.viewList} key={index}>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    margin: 20,
+                  }}>
+                  <Text style={{color: '#fff', flex: 1}}>{value}</Text>
+                  <TouchableOpacity onPress={() => this.deleteData(index)}>
+                    <Image
+                      source={trash}
+                      style={{width: 25, height: 25, tintColor: '#fff'}}
+                    />
+                  </TouchableOpacity>
+                </View>
+              </View>
+            ))}
           </View>
-        ))}
+        </ImageBackground>
       </View>
     );
   }
 }
 
-export default array;
+export default dashboard;

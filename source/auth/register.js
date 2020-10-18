@@ -79,11 +79,15 @@ export default class Register extends Component {
                 placeholder="Your Name"
                 style={styles.textInput}
                 onChangeText={(name) => this.setState({name})}
+                selectionColor="#ff00ff"
+                placeholderTextColor="white"
               />
             </View>
             <View style={styles.textInputView}>
               <Image source={email} style={styles.textInputEmail} />
               <TextInput
+                selectionColor="#ff00ff"
+                placeholderTextColor="white"
                 placeholder={'Email'}
                 style={styles.textInput}
                 onChangeText={(email) => this.setState({email})}
@@ -92,6 +96,8 @@ export default class Register extends Component {
             <View style={styles.textInputView}>
               <Image source={lock} style={styles.textInputImage2} />
               <TextInput
+                selectionColor="#ff00ff"
+                placeholderTextColor="white"
                 placeholder={'Password'}
                 secureTextEntry={true}
                 style={styles.textInput}
@@ -101,6 +107,8 @@ export default class Register extends Component {
             <View style={styles.textInputView}>
               <Image source={lock} style={styles.textInputImage2} />
               <TextInput
+                selectionColor="#ff00ff"
+                placeholderTextColor="white"
                 placeholder={'Confirm Password'}
                 secureTextEntry={true}
                 style={styles.textInput}

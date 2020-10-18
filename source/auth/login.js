@@ -10,7 +10,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import bg from '../assets/bg.jpg';
-import avatar from '../assets/plainAvatar.png';
+import avatar from '../assets/email.png';
 import lock from '../assets/lock.png';
 
 export default class Login extends Component {
@@ -94,14 +94,19 @@ export default class Login extends Component {
             <View style={styles.textInputView}>
               <Image source={avatar} style={styles.textInputImage} />
               <TextInput
+                selectionColor="#ff00ff"
                 placeholder={'Email'}
+                placeholderTextColor="white"
                 style={styles.textInput}
                 onChangeText={(name) => this.setState({email: name})}
+                keyboardType="email-address"
               />
             </View>
             <View style={styles.textInputView}>
               <Image source={lock} style={styles.textInputImage2} />
               <TextInput
+                selectionColor="#ff00ff"
+                placeholderTextColor="white"
                 placeholder={'Password'}
                 secureTextEntry={true}
                 style={styles.textInput}

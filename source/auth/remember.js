@@ -25,8 +25,9 @@ export default class Login extends Component {
             <Text
               style={{
                 textAlign: 'center',
-                paddingHorizontal: 20,
+                paddingHorizontal: 40,
                 marginBottom: 10,
+                color: 'white',
               }}>
               We will send your password through email. Make sure to check your
               spam!
@@ -34,6 +35,8 @@ export default class Login extends Component {
             <View style={styles.textInputView}>
               <Image source={email} style={styles.textInputImage} />
               <TextInput
+                selectionColor="#ff00ff"
+                placeholderTextColor="white"
                 placeholder={'Email'}
                 style={styles.textInput}
                 onChangeText={(name) => this.setState({loginData: name})}

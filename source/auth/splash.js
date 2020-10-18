@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {ActivityIndicator, Text, View} from 'react-native';
-import Login from './login';
-import Navigator from '../components/navigator';
+import Navigator from '../router/navigator';
 
 export class splash extends Component {
   constructor() {

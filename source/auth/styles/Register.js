@@ -2,15 +2,24 @@ import {StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
   mainView: {
-    backgroundColor: '#ffffffb3',
+    backgroundColor: '#000000b3',
     margin: 20,
     borderRadius: 10,
+    width: 380,
+    height: 450,
+    justifyContent: 'center',
   },
   mainText: {
+    color: '#fff',
     textAlign: 'center',
     fontSize: 35,
-    marginTop: 20,
     marginBottom: 10,
+    textShadowColor: '#db66ff',
+    textShadowRadius: 5,
+    textShadowOffset: {
+      width: 1,
+      height: 1,
+    },
   },
   subView: {
     margin: 10,
@@ -19,7 +28,7 @@ export default StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     alignSelf: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: '#e48aff94',
     borderRadius: 5,
     height: 50,
     width: 300,
@@ -30,14 +39,17 @@ export default StyleSheet.create({
     height: 15,
     marginLeft: 8,
     marginRight: 11,
+    tintColor: '#fff',
   },
   textInputImage: {
+    tintColor: '#fff',
     width: 25,
     height: 25,
     marginRight: 7,
     marginLeft: 6,
   },
   textInputImage2: {
+    tintColor: '#fff',
     width: 25,
     height: 25,
     marginRight: 8,
@@ -45,16 +57,18 @@ export default StyleSheet.create({
   },
   textInput: {
     width: '80%',
+    color: 'white',
   },
   backgroundImage: {
     width: '100%',
     height: '100%',
     justifyContent: 'center',
+    alignItems: 'center',
   },
   textViewLogin: {
     alignSelf: 'center',
     justifyContent: 'center',
-    backgroundColor: '#faaf00',
+    backgroundColor: '#d447ff',
     borderRadius: 5,
     height: 50,
     width: 300,
@@ -79,7 +93,6 @@ export default StyleSheet.create({
     fontWeight: 'bold',
     color: 'grey',
     textAlign: 'center',
-    marginBottom: 20,
     marginTop: 10,
   },
 });
