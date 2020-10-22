@@ -22,6 +22,10 @@ export class dashboard extends Component {
       desc: '',
       image: '',
       isDone: '0',
+      avatarSource: {
+        uri: 'https://static.thenounproject.com/png/1560819-200.png',
+      },
+      token: '',
     };
   }
 

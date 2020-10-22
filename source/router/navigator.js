@@ -5,7 +5,6 @@ import Login from '../auth/login';
 import Register from '../auth/register';
 import API from '../components/api';
 import Remember from '../auth/remember';
-import Hai from '../hai';
 import TheDrawer from './drawer';
 
 const Navigation = createStackNavigator();
@@ -19,7 +18,6 @@ const Navigator = () => {
         <Navigation.Screen name="Remember" component={Remember} />
         <Navigation.Screen name="Home" component={TheDrawer} />
         <Navigation.Screen name="API" component={API} />
-        <Navigation.Screen name="hai" component={Hai} />
       </Navigation.Navigator>
     </NavigationContainer>
   );
